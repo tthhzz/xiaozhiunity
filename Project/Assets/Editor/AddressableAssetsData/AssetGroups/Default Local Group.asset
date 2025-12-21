@@ -1,0 +1,200 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3223e73fd5f2332419416c15824e48f0
+  m_SerializeEntries:
+  - m_GUID: 0038c1954ddcddd47863854cbb3b96e1
+    m_Address: Assets/Res/VRM/Common/idle.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03ff8b72f21dff745b92e8f7b0997b0c
+    m_Address: Assets/Res/UI/MaskUI/MaskUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05cd9f9ef92dbf64b8a51b5c199d8f89
+    m_Address: Assets/Res/VRM/Common/greet1.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 115758f82119e1c46a567ac7dfbeacaf
+    m_Address: Assets/Res/UI/SettingsUI/SettingsUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15f636cb704fcc041a25c9652cdc690f
+    m_Address: Assets/Res/VRM/Common/bye1.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1611ec52f2e0c174b96111a22cf1d3f6
+    m_Address: Assets/Res/UI/MainUI/WallpaperUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16a7f1301ec13ec4c868c6c5f0490aee
+    m_Address: Assets/Res/VRM/Common/talk3.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2abc3ac25f72ff04cad2b03d8f77d5b8
+    m_Address: Assets/Res/Background/stage.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 322d2359206821244a865111c1e49f7d
+    m_Address: Assets/Res/VRM/Girl/prefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 327024787d0342a478cbcd4be1fb04c1
+    m_Address: Assets/Res/VRM/Common/stand5.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34a89379b76654e44abe169ae142b026
+    m_Address: Assets/Res/VRM/Common/stand1.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35efebc38724b004996aaa2065f59b75
+    m_Address: Assets/Res/VRM/Common/talk5.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 389bfb490a152d6408a6e0ac095c2260
+    m_Address: Assets/Res/VRM/Common/talk1.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38d3737f113943349ae03a312dab59e0
+    m_Address: Assets/Res/VRM/Common/talk4.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ef66b151a374a64b7a04beb381b201d
+    m_Address: Assets/Settings/OTAPostData.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57129b1ef73174742bf7d79a2d5175fc
+    m_Address: Assets/Res/VRM/Common/stand3.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57a478770838afe439778b4d969fb6ca
+    m_Address: Assets/Res/Sprite/Common.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58ec6ba024cfad441a69b765c3ab8d65
+    m_Address: Assets/Res/VRM/Common/stand6.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b5bec4fad44cf744a3d6baf0a538297
+    m_Address: Assets/Res/UI/MainUI/VRMMainUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5caad0a8eace6f64f98bc55dcfa79058
+    m_Address: Assets/Res/UI/MainUI/EmojiMainUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74e25153ba5f0e94c9e40266b9e4836c
+    m_Address: Assets/Res/UI/NotificationUI/NotificationUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83b06540825564d43b06437b9c9f7715
+    m_Address: Assets/Res/Dance/jimingyue/bgm.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 869e36edff778a7488df32b3c34e7c10
+    m_Address: Assets/Res/UI/MIoTUI/LoginUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fb3d09369490bc4eb7b8031e638a529
+    m_Address: Assets/Res/Dance/jimingyue/anim.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91e98586bd47e6249a3a403322e58f9d
+    m_Address: Assets/Res/UI/SettingsUI/App.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 999d4545851b66e4abfb9edf89545211
+    m_Address: Assets/Res/VRM/Common/stand4.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3bf7d4f687b101418b5f8176a3cc876
+    m_Address: Assets/Res/Background/nebula.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8db7ec5a466bbd4991ad3399b64c66c
+    m_Address: Assets/Settings/AppPresets.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4ac52fb8d83aa344982e01e0d99ccfc
+    m_Address: Assets/Res/Sprite/Icon.spriteatlasv2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da26442f4c66f0442bfd1210ec74a733
+    m_Address: Assets/Settings/ThemeSettings.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2926aa68dcd22644aa8cd7b6676dae7
+    m_Address: Assets/Res/VRM/Common/stand2.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e88d029d979a98649a89e19a530cd14a
+    m_Address: Assets/Res/VRM/Boy/prefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb4f651d55ed44e49b6e7656d7e18446
+    m_Address: Assets/Res/VRM/Common/talk2.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0a12e39d5494fb40b6bbc9a5468841d
+    m_Address: Assets/Res/VRM/Common/think.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1262f76c688ce44a8f4a66d11817e66
+    m_Address: Assets/Res/Video/star_field.mp4
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 63df72acf4c063249aea2a9fa4ba07d6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 69f2f9b0c61d1b740889c0a1af62ccbe, type: 2}
+    - {fileID: 11400000, guid: c61eac82023c90b4bac3feb982cbc939, type: 2}

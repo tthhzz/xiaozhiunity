@@ -1,0 +1,349 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Lang Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Lang
+  m_TableCollectionNameGuidString: a7b2e24c04810a64480b1c3fd755abb3
+  m_Entries:
+  - m_Id: 3314955651
+    m_Key: STATE_STARTING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955652
+    m_Key: STATE_STANDBY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955655
+    m_Key: STATE_SPEAKING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955654
+    m_Key: STATE_LISTENING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955656
+    m_Key: STATE_ERROR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955653
+    m_Key: STATE_CONNECTING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955664
+    m_Key: SettingsUI_WebSocketUrl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955665
+    m_Key: SettingsUI_WebSocketAccessToken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955679
+    m_Key: SettingsUI_Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955658
+    m_Key: SettingsUI_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955681
+    m_Key: SettingsUI_Theme
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7054277517205504
+    m_Key: SettingsUI_Tab_MIoT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7054207824650240
+    m_Key: SettingsUI_Tab_Common
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955684
+    m_Key: SettingsUI_Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955662
+    m_Key: SettingsUI_Placeholder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955663
+    m_Key: SettingsUI_OTAUrl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955659
+    m_Key: SettingsUI_Modify_Tips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955678
+    m_Key: SettingsUI_Microphone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955683
+    m_Key: SettingsUI_Lang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955677
+    m_Key: SettingsUI_Keywords_Help
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955676
+    m_Key: SettingsUI_Keywords
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955660
+    m_Key: SettingsUI_Invalid_Url_Tips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955661
+    m_Key: SettingsUI_Invalid_MacAddress_Tips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955682
+    m_Key: SettingsUI_Fill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955669
+    m_Key: SettingsUI_DisplayMode_VRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955668
+    m_Key: SettingsUI_DisplayMode_Emoji
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955667
+    m_Key: SettingsUI_DisplayMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955666
+    m_Key: SettingsUI_CustomMacAddress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955670
+    m_Key: SettingsUI_Character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955674
+    m_Key: SettingsUI_BreakMode_VAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955672
+    m_Key: SettingsUI_BreakMode_None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955673
+    m_Key: SettingsUI_BreakMode_Keyword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955675
+    m_Key: SettingsUI_BreakMode_Free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955671
+    m_Key: SettingsUI_BreakMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955680
+    m_Key: SettingsUI_AutoHide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955686
+    m_Key: Permission_WriteStorage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955690
+    m_Key: Permission_Request_Failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955685
+    m_Key: Permission_ReadStorage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955689
+    m_Key: Permission_One_Request_Failed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955688
+    m_Key: Permission_Microphone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955687
+    m_Key: Permission_Camera
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7889234766553088
+    m_Key: MIoT_VerifyTips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7889102125883392
+    m_Key: MIoT_VerifyCode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7889508973371392
+    m_Key: MIoT_Verify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7895673413263360
+    m_Key: MIoT_ReturnToLogin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7957408966991872
+    m_Key: MIoT_RefreshSuccess
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052731333173248
+    m_Key: MIoT_Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7053541869838336
+    m_Key: MIoT_Refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7053948998344704
+    m_Key: MIoT_ModifyPropertyFailed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052100107198464
+    m_Key: MIoT_Logout
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052185847160832
+    m_Key: MIoT_LoginSuccess
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052351807381504
+    m_Key: MIoT_LoginFailed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052053349097472
+    m_Key: MIoT_Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052665411297280
+    m_Key: MIoT_Home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7052790267338752
+    m_Key: MIoT_DeviceTips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7053570470797312
+    m_Key: MIoT_ClearAll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7051894095568896
+    m_Key: MIoT_Account
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955657
+    m_Key: MIC_NOT_FOUND_TIPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7077900567142400
+    m_Key: LOADING_THINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955649
+    m_Key: LOADING_RESOURCES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955650
+    m_Key: LOADING_MODEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2159431325278208
+    m_Key: iOS_App_Info_User_Tracking_Usage_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2159389092831232
+    m_Key: iOS_App_Info_Mic_Usage_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2159308025323520
+    m_Key: iOS_App_Info_Location_Usage_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2159087987941376
+    m_Key: iOS_App_Info_Camera_Usage_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2160026320855040
+    m_Key: App_Info_Short_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2160154335207424
+    m_Key: App_Info_Display_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955648
+    m_Key: ACTIVATION_FAILED_TIPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2492018094
+    m_Key: ACTIVATION_CODE_COPIED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3314955647
+    m_Key: ACTIVATION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7900086924173312
+    m_Key: MIoT_Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7957408966991872
+    m_Key: MIoT_RefreshSuccess
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8675432594366464
+    m_Key: CONNECTION_CLOSED_TIPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49667773039599616
+    m_Key: SettingsUI_ZoomMode_LongShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49667893739085824
+    m_Key: SettingsUI_ZoomMode_MediumShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49668220370509824
+    m_Key: SettingsUI_ZoomMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49669933450092544
+    m_Key: Connect_Failed_Tips
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50563706090643456
+    m_Key: SettingsUI_Background
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51076010605674496
+    m_Key: SettingsUI_ZoomMode_CloseShot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56504903709884416
+    m_Key: STATE_DANCING
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8193056261008261157
+  references:
+    version: 2
+    RefIds:
+    - rid: 8193056261008261157
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1744474110420

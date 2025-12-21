@@ -1,0 +1,278 @@
+using UnityEngine;
+using System;
+using System.Text;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace XiaoZhi.Unity
+{
+    public class WebSocketProtocol : Protocol
+    {
+        private ClientWebSocket _webSocket;
+        private bool _isConnected;
+        private bool _isAudioChannelOpen;
+        private bool _errorOccurred;
+        private CancellationTokenSource _cancellationTokenSource;
+        private TaskCompletionSource<bool> _helloTaskCompletionSource;
+        private DateTime _lastIncomingTime;
+        private Memory<byte> _buffer;
+
+        public override void Start()
+        {
+            _buffer = new byte[4096];
+        }
+
+        public override void Dispose()
+        {
+            _ = CloseWebSocket();
+        }
+
+        public void Configure()
+        {
+        }
+
+        public override async UniTask<bool> OpenAudioChannel()
+        {
+            var url = AppSettings.Instance.GetWebSocketUrl();
+            var token = AppSettings.Instance.GetWebSocketAccessToken();
+            var deviceId = AppSettings.Instance.GetMacAddress();
+            var clientId = AppUtility.GetUUid();
+            Debug.Log($"url: {url}");
+            Debug.Log($"token: {token}");
+            Debug.Log($"deviceId: {deviceId}");
+            Debug.Log($"clientId: {clientId}");
+            if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(token) ||
+                string.IsNullOrEmpty(deviceId) || string.IsNullOrEmpty(clientId))
+            {
+                Debug.LogError("连接失败: 请检查配置");
+                return false;
+            }
+
+            await CloseWebSocket();
+
+            _errorOccurred = false;
+            _webSocket = new ClientWebSocket();
+            _cancellationTokenSource = new CancellationTokenSource();
+            _helloTaskCompletionSource = new TaskCompletionSource<bool>();
+
+            // 设置请求头
+            _webSocket.Options.SetRequestHeader("Authorization", $"Bearer {token}");
+            _webSocket.Options.SetRequestHeader("Protocol-Version", "1");
+            _webSocket.Options.SetRequestHeader("Device-Id", deviceId);
+            _webSocket.Options.SetRequestHeader("Client-Id", clientId);
+
+            // 异步连接
+            try
+            {
+                await _webSocket.ConnectAsync(new Uri(url), _cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+            
+            _isConnected = true;
+            Debug.Log("WebSocket连接已打开");
+            StartReceiving().Forget();
+            var helloMessage = new
+            {
+                type = "hello",
+                version = 1,
+                transport = "websocket",
+                audio_params = new
+                {
+                    format = "opus",
+                    sample_rate = 16000,
+                    channels = 1,
+                    frame_duration = AppPresets.Instance.OpusFrameDurationMs
+                }
+            };
+            await SendText(JsonConvert.SerializeObject(helloMessage));
+            await Task.WhenAny(_helloTaskCompletionSource.Task, Task.Delay(10000));
+            if (_helloTaskCompletionSource.Task.IsCompletedSuccessfully) return true;
+            Debug.LogError("连接失败: 连接超时");
+            return false;
+        }
+
+        private async UniTaskVoid StartReceiving()
+        {
+            try
+            {
+                while (_webSocket.State == WebSocketState.Open)
+                {
+                    var result = await _webSocket.ReceiveAsync(
+                        _buffer,
+                        _cancellationTokenSource.Token);
+                    switch (result.MessageType)
+                    {
+                        case WebSocketMessageType.Close:
+                            await HandleWebSocketClose();
+                            break;
+                        case WebSocketMessageType.Binary:
+                            InvokeOnAudioData(_buffer.Slice(0, result.Count).Span);
+                            break;
+                        case WebSocketMessageType.Text:
+                            var messageText = Encoding.UTF8.GetString(_buffer.Span.Slice(0, result.Count));
+                            Debug.Log($"Incoming json: {messageText}");
+                            HandleJsonMessage(messageText);
+                            _lastIncomingTime = DateTime.Now;
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_webSocket?.State == WebSocketState.Open)
+                {
+                    SetError($"接收消息错误: {ex.Message}");
+                }
+            }
+        }
+
+        private async UniTask HandleWebSocketClose()
+        {
+            if (_webSocket.State == WebSocketState.Open)
+            {
+                await _webSocket.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Client initiated close",
+                    _cancellationTokenSource.Token);
+            }
+
+            _isConnected = false;
+            _isAudioChannelOpen = false;
+            Debug.Log("WebSocket连接已关闭");
+            InvokeOnChannelClosed();
+        }
+
+        private void HandleJsonMessage(string jsonStr)
+        {
+            try
+            {
+                var message = JObject.Parse(jsonStr);
+                var messageType = message["type"]?.ToString();
+                if (messageType == "hello")
+                {
+                    HandleServerHello(message);
+                }
+
+                InvokeOnJsonMessage(message);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"解析JSON消息失败: {e.Message}");
+            }
+        }
+
+        private void HandleServerHello(JObject message)
+        {
+            if (message["transport"]?.ToString() != "websocket")
+            {
+                _helloTaskCompletionSource.SetResult(false);
+                SetError("不支持的传输类型");
+                return;
+            }
+
+            var audioParams = message["audio_params"];
+            if (audioParams != null) ServerSampleRate = audioParams["sample_rate"]?.Value<int>() ?? 16000;
+            SessionId = message.Value<string>("session_id");
+            _isAudioChannelOpen = true;
+            InvokeOnChannelOpened();
+            _helloTaskCompletionSource.SetResult(true);
+        }
+        
+        protected override async UniTask SendText(string text)
+        {
+            if (!_isConnected || _webSocket.State != WebSocketState.Open)
+            {
+                SetError("WebSocket is not connected");
+                return;
+            }
+            
+            Debug.Log($"SendText: {text}");
+            var bytes = Encoding.UTF8.GetBytes(text);
+            await _webSocket.SendAsync(
+                new ArraySegment<byte>(bytes),
+                WebSocketMessageType.Text,
+                true,
+                _cancellationTokenSource.Token);
+        }
+
+        public override async UniTask SendAudio(ReadOnlyMemory<byte> audioData)
+        {
+            if (!_isConnected || !_isAudioChannelOpen || _webSocket.State != WebSocketState.Open)
+            {
+                SetError("WebSocket is not connected");
+                return;
+            }
+
+            await _webSocket.SendAsync(
+                audioData,
+                WebSocketMessageType.Binary,
+                true,
+                _cancellationTokenSource.Token);
+        }
+
+        public override async UniTask CloseAudioChannel()
+        {
+            await CloseWebSocket();
+        }
+
+        private async UniTask CloseWebSocket()
+        {
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
+            }
+
+            if (_webSocket != null)
+            {
+                if (_webSocket.State == WebSocketState.Open)
+                {
+                    try
+                    {
+                        await _webSocket.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "Client initiated close",
+                            CancellationToken.None);
+                    }
+                    catch (Exception)
+                    {
+                        // Ignore any errors during close
+                    }
+                }
+
+                _webSocket.Dispose();
+                _webSocket = null;
+            }
+
+            _isAudioChannelOpen = false;
+            _isConnected = false;
+        }
+
+        public override bool IsAudioChannelOpened()
+        {
+            return _isConnected && _isAudioChannelOpen && !_errorOccurred && !IsTimeout() && _webSocket.State == WebSocketState.Open;
+        }
+
+        private bool IsTimeout()
+        {
+            if (_lastIncomingTime == default)
+                return false;
+            return (DateTime.Now - _lastIncomingTime).TotalSeconds > 120;
+        }
+
+        private void SetError(string errorMessage)
+        {
+            _errorOccurred = true;
+            InvokeOnNetworkError(errorMessage);
+        }
+    }
+}

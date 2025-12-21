@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b0b8de97029a342bcad2063e77aed0, type: 3}
+  m_Name: AppPresets
+  m_EditorClassIdentifier: 
+  _webSocketUrl: wss://api.tenclass.net/xiaozhi/v1/
+  _webSocketAccessToken: test-token
+  _opusFrameDurationMs: 60
+  _audioInputSampleRate: 16000
+  _audioOutputSampleRate: 24000
+  _serverInputSampleRate: 16000
+  _enableWakeService: 1
+  _otaVersionUrl: https://api.tenclass.net/xiaozhi/ota/
+  _keyWords:
+  - _localeCode: zh-Hans
+    _spotterModelConfigTransducerEncoder: sherpa-onnx/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01/encoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigTransducerDecoder: sherpa-onnx/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01/decoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigTransducerJoiner: sherpa-onnx/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01/joiner-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigToken: sherpa-onnx/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01/tokens.txt
+    _spotterKeyWordsFile: sherpa-onnx/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01/keywords.txt
+    _spotterModelConfigNumThreads: 2
+  - _localeCode: en
+    _spotterModelConfigTransducerEncoder: sherpa-onnx/sherpa-onnx-kws-zipformer-gigaspeech-3.3M-2024-01-01/encoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigTransducerDecoder: sherpa-onnx/sherpa-onnx-kws-zipformer-gigaspeech-3.3M-2024-01-01/decoder-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigTransducerJoiner: sherpa-onnx/sherpa-onnx-kws-zipformer-gigaspeech-3.3M-2024-01-01/joiner-epoch-12-avg-2-chunk-16-left-64.int8.onnx
+    _spotterModelConfigToken: sherpa-onnx/sherpa-onnx-kws-zipformer-gigaspeech-3.3M-2024-01-01/tokens.txt
+    _spotterKeyWordsFile: sherpa-onnx/sherpa-onnx-kws-zipformer-gigaspeech-3.3M-2024-01-01/keywords.txt
+    _spotterModelConfigNumThreads: 2
+  _vadModelConfig: sherpa-onnx/silero_vad.onnx
+  _activationURL: https://xiaozhi.me
+  _vrmCharacterModels:
+  - _name: Girl
+    _path: Assets/Res/VRM/Girl/prefab.prefab
+    _color: {r: 1, g: 0.72641504, b: 0.896139, a: 1}
+  - _name: Boy
+    _path: Assets/Res/VRM/Boy/prefab.prefab
+    _color: {r: 0.4784366, g: 0.72414917, b: 1, a: 1}
+  _videos:
+  - _name: Star Field
+    _path: Assets/Res/Video/star_field.mp4
+  _wallpapers:
+  - _type: 0
+    _name: Default
+    _path: 
+  - _type: 1
+    _name: Stage
+    _path: Assets/Res/Background/stage.jpg
+  - _type: 3
+    _name: Nebula
+    _path: Assets/Res/Background/nebula.asset
+  _animationLibs:
+  - _name: Default
+    _sets:
+    - _anims:
+      - _name: idle
+        _path: Assets/Res/VRM/Common/idle.anim
+        _weight: 1
+        _fadeIn: 1
+      _labels:
+      - idle
+    - _anims:
+      - _name: greet1
+        _path: Assets/Res/VRM/Common/greet1.anim
+        _weight: 1
+        _fadeIn: 1
+      _labels:
+      - greet
+    - _anims:
+      - _name: talk1
+        _path: Assets/Res/VRM/Common/talk1.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: talk2
+        _path: Assets/Res/VRM/Common/talk2.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: talk3
+        _path: Assets/Res/VRM/Common/talk3.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: talk4
+        _path: Assets/Res/VRM/Common/talk4.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: talk5
+        _path: Assets/Res/VRM/Common/talk5.anim
+        _weight: 1
+        _fadeIn: 1
+      _labels:
+      - talk
+    - _anims:
+      - _name: stand1
+        _path: Assets/Res/VRM/Common/stand1.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: stand2
+        _path: Assets/Res/VRM/Common/stand2.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: stand3
+        _path: Assets/Res/VRM/Common/stand3.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: stand4
+        _path: Assets/Res/VRM/Common/stand4.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: stand5
+        _path: Assets/Res/VRM/Common/stand5.anim
+        _weight: 1
+        _fadeIn: 1
+      - _name: stand6
+        _path: Assets/Res/VRM/Common/stand6.anim
+        _weight: 1
+        _fadeIn: 1
+      _labels:
+      - stand
+    - _anims:
+      - _name: bye1
+        _path: Assets/Res/VRM/Common/bye1.anim
+        _weight: 1
+        _fadeIn: 1
+      _labels:
+      - bye
+  _dances:
+  - _name: "\u5BC4\u660E\u6708"
+    _animation: Assets/Res/Dance/jimingyue/anim.anim
+    _bgm: Assets/Res/Dance/jimingyue/bgm.mp3
