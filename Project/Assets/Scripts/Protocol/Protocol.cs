@@ -132,6 +132,19 @@ namespace XiaoZhi.Unity
             await jsonWriter.WriteEndObjectAsync();
             await SendText(stringWriter.ToString());
         }
+
+        /// <summary>
+        /// Send MCP response back to server
+        /// </summary>
+        public virtual async UniTask SendMcpResponse(string mcpPayload)
+        {
+            await SendText(JsonConvert.SerializeObject(new
+            {
+                session_id = SessionId,
+                type = "mcp",
+                payload = JObject.Parse(mcpPayload)
+            }));
+        }
         
         protected abstract UniTask SendText(string text);
 

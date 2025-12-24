@@ -122,6 +122,15 @@ namespace XiaoZhi.Unity
 
             _talk.Info = Lang.GetRef("LOADING_THINGS");
             await _context.ThingManager.Load();
+            
+            // 使用默认vision服务（和py-xiaozhi一样）
+            if (string.IsNullOrEmpty(AppSettings.Instance.GetCameraExplainUrl()))
+            {
+                Debug.Log("[App] Setting default vision service URL");
+                AppSettings.Instance.SetCameraExplainUrl("https://api.xiaozhi.me/vision/explain");
+            }
+            
+            InitializeCamera();
             InitializeProtocol();
             StartDisplay();
             _talk.Stat = State.Idle;
@@ -466,6 +475,56 @@ namespace XiaoZhi.Unity
             _codec.SetOutputVolume(AppSettings.Instance.GetOutputVolume());
             _codec.Start();
             AppSettings.Instance.OnOutputVolumeUpdate += volume => { _codec.SetOutputVolume(volume); };
+        }
+
+        private void InitializeCamera()
+        {
+            Debug.Log("[App] Initializing camera...");
+            
+            // 获取智谱AI配置
+            var vlApiKey = AppSettings.Instance.GetCameraVLApiKey();
+            var vlUrl = AppSettings.Instance.GetCameraVLUrl();
+            var vlModel = AppSettings.Instance.GetCameraModel();
+            
+            // 获取外部服务配置
+            var explainUrl = AppSettings.Instance.GetCameraExplainUrl();
+            var explainToken = AppSettings.Instance.GetCameraExplainToken();
+            
+            // 清理旧的错误URL（只清理tenclass域名下的错误路径）
+            if (!string.IsNullOrEmpty(explainUrl) && 
+                explainUrl.Contains("api.tenclass.net") && 
+                explainUrl.Contains("/vision/explain"))
+            {
+                Debug.LogWarning($"[App] Clearing invalid tenclass URL: {explainUrl}");
+                AppSettings.Instance.SetCameraExplainUrl("");
+                explainUrl = "";
+            }
+            
+            Debug.Log($"[App] VL API Key: {(!string.IsNullOrEmpty(vlApiKey) ? "Set" : "Not set")}");
+            Debug.Log($"[App] VL URL: {vlUrl}");
+            Debug.Log($"[App] VL Model: {vlModel}");
+            Debug.Log($"[App] Explain URL: {explainUrl}");
+            Debug.Log($"[App] Explain Token: {(!string.IsNullOrEmpty(explainToken) ? "Set" : "Not set")}");
+            
+            // 配置智谱AI（优先）
+            if (!string.IsNullOrEmpty(vlApiKey))
+            {
+                CameraManager.Instance.SetVLApiKey(vlApiKey);
+                CameraManager.Instance.SetVLUrl(vlUrl);
+                CameraManager.Instance.SetVLModel(vlModel);
+                Debug.Log("[App] Camera initialized with Zhipu AI mode");
+            }
+            // 配置外部服务（仅当有有效URL时）
+            else if (!string.IsNullOrEmpty(explainUrl))
+            {
+                CameraManager.Instance.SetExplainUrl(explainUrl);
+                CameraManager.Instance.SetExplainToken(explainToken);
+                Debug.Log($"[App] Camera initialized with External explain service mode: {explainUrl}");
+            }
+            else
+            {
+                Debug.LogWarning("[App] Camera not configured. Please set VL API Key or wait for server vision config");
+            }
         }
 
         private void InitializeProtocol()

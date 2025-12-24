@@ -36,6 +36,16 @@ namespace XiaoZhi.Unity
 
         private string _customMacAddress;
 
+        private string _cameraExplainUrl;
+
+        private string _cameraExplainToken;
+
+        private string _cameraVLApiKey;
+
+        private string _cameraVLUrl;
+
+        private string _cameraModel;
+
         public event Action<bool> OnAutoHideUIUpdate;
         public event Action<int> OnOutputVolumeUpdate;
 
@@ -204,6 +214,76 @@ namespace XiaoZhi.Unity
             if (_customMacAddress.Equals(macAddress)) return;
             _customMacAddress = macAddress;
             SetString("custom_mac_address", _customMacAddress);
+            Save();
+        }
+
+        public string GetCameraExplainUrl()
+        {
+            _cameraExplainUrl ??= GetString("camera_explain_url", "");
+            return _cameraExplainUrl;
+        }
+
+        public void SetCameraExplainUrl(string url)
+        {
+            if (_cameraExplainUrl.Equals(url)) return;
+            _cameraExplainUrl = url;
+            SetString("camera_explain_url", _cameraExplainUrl);
+            Save();
+        }
+
+        public string GetCameraExplainToken()
+        {
+            _cameraExplainToken ??= GetString("camera_explain_token", "");
+            return _cameraExplainToken;
+        }
+
+        public void SetCameraExplainToken(string token)
+        {
+            if (_cameraExplainToken.Equals(token)) return;
+            _cameraExplainToken = token;
+            SetString("camera_explain_token", _cameraExplainToken);
+            Save();
+        }
+
+        public string GetCameraVLApiKey()
+        {
+            _cameraVLApiKey ??= GetString("camera_vl_api_key", "");
+            return _cameraVLApiKey;
+        }
+
+        public void SetCameraVLApiKey(string apiKey)
+        {
+            if (_cameraVLApiKey.Equals(apiKey)) return;
+            _cameraVLApiKey = apiKey;
+            SetString("camera_vl_api_key", _cameraVLApiKey);
+            Save();
+        }
+
+        public string GetCameraVLUrl()
+        {
+            _cameraVLUrl ??= GetString("camera_vl_url", "https://open.bigmodel.cn/api/paas/v4/");
+            return _cameraVLUrl;
+        }
+
+        public void SetCameraVLUrl(string url)
+        {
+            if (_cameraVLUrl.Equals(url)) return;
+            _cameraVLUrl = url;
+            SetString("camera_vl_url", _cameraVLUrl);
+            Save();
+        }
+
+        public string GetCameraModel()
+        {
+            _cameraModel ??= GetString("camera_model", "glm-4v-plus");
+            return _cameraModel;
+        }
+
+        public void SetCameraModel(string model)
+        {
+            if (_cameraModel.Equals(model)) return;
+            _cameraModel = model;
+            SetString("camera_model", _cameraModel);
             Save();
         }
     }

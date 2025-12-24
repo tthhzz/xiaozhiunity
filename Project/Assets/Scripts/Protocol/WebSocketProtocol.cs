@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using XiaoZhi.Unity.Mcp;
 
 namespace XiaoZhi.Unity
 {
@@ -84,6 +85,10 @@ namespace XiaoZhi.Unity
                 type = "hello",
                 version = 1,
                 transport = "websocket",
+                features = new
+                {
+                    mcp = true
+                },
                 audio_params = new
                 {
                     format = "opus",
@@ -160,6 +165,21 @@ namespace XiaoZhi.Unity
                 {
                     HandleServerHello(message);
                 }
+                else if (messageType == "mcp")
+                {
+                    // Handle MCP message - extract payload and process
+                    var payload = message["payload"] as JObject;
+                    if (payload != null)
+                    {
+                        HandleMcpMessage(payload).Forget();
+                    }
+                    else
+                    {
+                        // If no payload, the message itself might be the MCP request
+                        HandleMcpMessage(message).Forget();
+                    }
+                    return; // Don't invoke normal json handler for MCP messages
+                }
 
                 InvokeOnJsonMessage(message);
             }
@@ -169,8 +189,16 @@ namespace XiaoZhi.Unity
             }
         }
 
+        private async UniTaskVoid HandleMcpMessage(JObject mcpMessage)
+        {
+            Debug.Log($"[WebSocketProtocol] Handling MCP message: {mcpMessage.ToString(Formatting.None)}");
+            await McpServer.Instance.ParseMessage(mcpMessage);
+        }
+
         private void HandleServerHello(JObject message)
         {
+            Debug.Log($"[WebSocketProtocol] Received hello message: {message.ToString()}");
+            
             if (message["transport"]?.ToString() != "websocket")
             {
                 _helloTaskCompletionSource.SetResult(false);
@@ -181,6 +209,45 @@ namespace XiaoZhi.Unity
             var audioParams = message["audio_params"];
             if (audioParams != null) ServerSampleRate = audioParams["sample_rate"]?.Value<int>() ?? 16000;
             SessionId = message.Value<string>("session_id");
+            
+            // Initialize MCP server with send callback
+            McpServer.Instance.SetSendCallback(SendMcpResponse);
+            McpServer.Instance.RegisterTools();
+            
+            // 检查是否有vision配置
+            var vision = message["vision"];
+            Debug.Log($"[WebSocketProtocol] Vision object in hello: {(vision != null ? vision.ToString() : "null")}");
+            
+            if (vision != null)
+            {
+                var visionObj = vision as Newtonsoft.Json.Linq.JObject;
+                if (visionObj != null)
+                {
+                    var visionUrl = visionObj["url"]?.ToString();
+                    var visionToken = visionObj["token"]?.ToString();
+                    
+                    Debug.Log($"[WebSocketProtocol] Parsed vision - URL: {visionUrl}, Token: {(!string.IsNullOrEmpty(visionToken) ? "Set" : "Not set")}");
+                    
+                    if (!string.IsNullOrEmpty(visionUrl))
+                    {
+                        AppSettings.Instance.SetCameraExplainUrl(visionUrl);
+                        if (!string.IsNullOrEmpty(visionToken))
+                        {
+                            AppSettings.Instance.SetCameraExplainToken(visionToken);
+                        }
+                        CameraManager.Instance.SetExplainUrl(visionUrl);
+                        CameraManager.Instance.SetExplainToken(visionToken);
+                        Debug.Log($"[WebSocketProtocol] ✅ Vision service configured from server: {visionUrl}");
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[WebSocketProtocol] ⚠️ No vision configuration in server hello message!");
+                Debug.LogWarning("[WebSocketProtocol] Server needs to include vision config in hello message:");
+                Debug.LogWarning("[WebSocketProtocol] { \"vision\": { \"url\": \"http://api.xiaozhi.me/vision/explain\", \"token\": \"...\" } }");
+            }
+            
             _isAudioChannelOpen = true;
             InvokeOnChannelOpened();
             _helloTaskCompletionSource.SetResult(true);
